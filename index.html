@@ -445,7 +445,7 @@
   // schedule definition: each day -> 4 slots
   var SCHEDULE = {
     Monday: [
-      {time:"8AM – 9AM", type:"dropdown", options:["Psychiatry","Anesthesiology","Pediatrics"]},
+      {time:"8AM – 9AM", type:"fixed", subject:"OBG"},
       {time:"9AM – 12PM", type:"fixed", subject:"Clinical Posting"},
       {time:"12PM – 1PM", type:"dropdown", options:["Radiotherapy","Ophthal"]},
       {time:"2PM – 4PM", type:"dropdown", options:["ENT","Ophthal"]}
@@ -463,7 +463,7 @@
       {time:"2PM – 4PM", type:"dropdown", options:["Respiratory Medicine","Psychiatry","Radiotherapy","Dermatology","Medicine"], label:"Medicine and allied"}
     ],
     Thursday: [
-      {time:"8AM – 9AM", type:"fixed", subject:"OBG"},
+      {time:"8AM – 9AM", type:"dropdown", options:["Psychiatry","Anesthesiology","Pediatrics"]},
       {time:"9AM – 12PM", type:"fixed", subject:"Clinical Posting"},
       {time:"12PM – 1PM", type:"fixed", subject:"Surgery"},
       {time:"2PM – 4PM", type:"dropdown", options:["Orthopaedics","Anesthesiology","Surgery"], label:"Surgery and allied"}
@@ -629,6 +629,10 @@
           subjEl.className = "subj";
           subjEl.textContent = slotDef.subject;
           slotEl.appendChild(subjEl);
+          if(cellData.subject !== slotDef.subject){
+            cellData.subject = slotDef.subject;
+            wd.cells[id] = cellData;
+          }
         } else if(slotDef.type === "auto"){
           var autoSubj = autoSlotSubject(store.currentWeek);
           var subjEl2 = document.createElement("div");
